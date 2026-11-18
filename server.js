@@ -3,15 +3,21 @@
 import express from "express";
 
 // Relative imports start with ./ and must end in .js . Forget .js and Node can't find the file.
-import logger from "./middleware/logger.js";
+import logger from "./middleware/logger.js"
 
 // We chose the name notesRoutes because the file uses export default .
 import notesRoutes from "./routes/notesRoutes.js";
 import notFound from "./middleware/notfound.js";
 import errorHandler from "./middleware/errorhandler.js";
+import bookRoutes from "./routes/bookRoutes.js";
+import requireJson from "./middleware/requireJson.js";
 
     const app = express();
     const PORT = 3000;
+
+    app.use(logger);
+    app.use(express.json());
+    app.use(requireJson);
 
 // 2. Routes
 // 2. A home route, then mount the router at /notes .
@@ -19,6 +25,7 @@ import errorHandler from "./middleware/errorhandler.js";
         res.json({ message: "Notes API is running. Try GET /notes" });
 });
     app.use("/notes", notesRoutes);
+    app.use("/books", bookRoutes);
 
 // 3. Error handling: these two always go LAST
 // 3. No route matched? Make a 404 error.

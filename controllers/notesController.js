@@ -105,3 +105,8 @@ if (!exists) {
     notes = notes.filter((n) => n.id !== id);
     res.status(204).send();
 }
+
+
+export function countNotes(req, res) {
+    res.json({ count: notes.length });
+};

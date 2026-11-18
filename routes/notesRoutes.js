@@ -10,6 +10,7 @@ import { Router } from "express";
         createNote,
         updateNote,
         deleteNote,
+        countNotes,
     } from "../controllers/notesController.js";
 
 // Create the router.
@@ -18,6 +19,7 @@ const router = Router();
 
 // Inside a router, "/" means wherever it's mounted. Here it will become /notes .
     router.get("/", getAllNotes);
+    router.get("/count", countNotes);
 
 // "/:id" becomes /notes/:id .
     router.get("/:id", getNoteById);
